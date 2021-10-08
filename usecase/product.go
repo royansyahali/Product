@@ -33,7 +33,7 @@ func (u *useCase) Get(orderBy string, order string) ([]domain.Product, error) {
 			return nil, err
 		}
 		for _, v := range products {
-			u.productCache.Set(v.Name, v)
+			u.productCache.Set(v.ID.String(), v)
 		}
 		return products, nil
 	}
