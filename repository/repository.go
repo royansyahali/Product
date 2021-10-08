@@ -28,11 +28,11 @@ func (r productRepository) Create(product domain.Product) (domain.Product, error
 		Quantity:    product.Quantity,
 		Description: product.Description,
 	}
-	// err := r.Find(product)
-	// if err != nil {
-	// 	return domain.Product{}, err
-	// }
-	err := r.db.Create(&newProduct).Error
+	err := r.Find(product)
+	if err != nil {
+		return domain.Product{}, err
+	}
+	err = r.db.Create(&newProduct).Error
 	if err != nil {
 		return domain.Product{}, errors.Wrap(err, "Failed to create product")
 	}
